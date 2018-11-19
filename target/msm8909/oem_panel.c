@@ -49,6 +49,7 @@
 #include "include/panel_auo_qvga_cmd.h"
 #include "include/panel_auo_cx_qvga_cmd.h"
 #include "include/panel_hx8394f_720p_video.h"
+#include "include/panel_kd101wx_720p_video.h"
 
 #define DISPLAY_MAX_PANEL_DETECTION 0
 #define ILI9806E_FWVGA_VIDEO_PANEL_POST_INIT_DELAY 68
@@ -86,6 +87,7 @@ enum {
 	AUO_QVGA_CMD_PANEL,
 	AUO_CX_QVGA_CMD_PANEL,
 	HX8394F_720P_VIDEO_PANEL,
+	KD101WX_720P_VIDEO_PANEL,
 	UNKNOWN_PANEL
 };
 
@@ -106,6 +108,7 @@ static struct panel_list supp_panels[] = {
 	{"auo_qvga_cmd", AUO_QVGA_CMD_PANEL},
 	{"auo_cx_qvga_cmd", AUO_CX_QVGA_CMD_PANEL},
 	{"hx8394f_720p_video", HX8394F_720P_VIDEO_PANEL},
+	{"kd101wx_720p_video", KD101WX_720P_VIDEO_PANEL},
 };
 
 static uint32_t panel_id;
@@ -185,6 +188,27 @@ static int init_panel_data(struct panel_struct *panelstruct,
 				hx8394d_720p_video_timings, TIMING_SIZE);
 		pinfo->mipi.signature = HX8394D_720P_VIDEO_SIGNATURE;
 		break;
+    case KD101WX_720P_VIDEO_PANEL:
+        panelstruct->paneldata    = &kd101wx_720p_video_panel_data;
+        panelstruct->panelres     = &kd101wx_720p_video_panel_res;
+        panelstruct->color        = &kd101wx_720p_video_color;
+        panelstruct->videopanel   = &kd101wx_720p_video_video_panel;
+        panelstruct->commandpanel = &kd101wx_720p_video_command_panel;
+        panelstruct->state        = &kd101wx_720p_video_state;
+        panelstruct->laneconfig   = &kd101wx_720p_video_lane_config;
+        panelstruct->paneltiminginfo
+                     = &kd101wx_720p_video_timing_info;
+        panelstruct->panelresetseq
+                     = &kd101wx_720p_video_reset_seq;
+        panelstruct->backlightinfo = &kd101wx_720p_video_backlight;
+        pinfo->mipi.panel_cmds
+                    = kd101wx_720p_video_on_command;
+        pinfo->mipi.num_of_panel_cmds
+                    = KD101WX_720P_VIDEO_ON_COMMAND;
+        memcpy(phy_db->timing,
+                kd101wx_720p_video_timings, TIMING_SIZE);
+        pinfo->mipi.signature =KD101WX_720P_VIDEO_SIGNATURE;
+        break;
         case SHARP_QHD_VIDEO_PANEL:
 		panelstruct->paneldata    = &sharp_qhd_video_panel_data;
 		panelstruct->panelres     = &sharp_qhd_video_panel_res;
@@ -452,7 +476,7 @@ int oem_panel_select(const char *panel_name, struct panel_struct *panelstruct,
 
 				break;
 			default:
-				panel_id = HX8394D_720P_VIDEO_PANEL;
+				panel_id = KD101WX_720P_VIDEO_PANEL;
 		}
 		break;
 	case HW_PLATFORM_QRD:

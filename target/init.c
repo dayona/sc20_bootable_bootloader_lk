@@ -309,6 +309,6 @@ bool target_battery_soc_ok()
 	if (target_get_battery_voltage() >= BATTERY_MIN_VOLTAGE)
 		return true;
 
-	return false;
+	return true;
 }
 #endif
