@@ -45,7 +45,7 @@
 /*---------------------------------------------------------------------------*/
 static struct panel_config ili9881c_720p_video_panel_data = {
 	"qcom,mdss_dsi_ili9881c_720p_video", "dsi:0:", "qcom,mdss-dsi-panel",
-	10, 0, "DISPLAY_1", 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	10, 0, "DISPLAY_1", 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
 };
 
 /*---------------------------------------------------------------------------*/
@@ -1264,9 +1264,9 @@ static struct panel_reset_sequence ili9881c_720p_video_reset_seq = {
 /*---------------------------------------------------------------------------*/
 /* Backlight setting                                                         */
 /*---------------------------------------------------------------------------*/
-static struct backlight ili9881c_720p_video_backlight = {
-	1, 1, 4095, 100, 0, "PMIC_8941"
-};
+// static struct backlight ili9881c_720p_video_backlight = {
+// 	1, 1, 4095, 100, 0, "PMIC_8941"
+// };
 
 #define ILI9881C_720P_VIDEO_SIGNATURE 0x9800
 

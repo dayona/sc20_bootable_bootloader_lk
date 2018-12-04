@@ -200,7 +200,7 @@ static int init_panel_data(struct panel_struct *panelstruct,
                      = &ili9881c_720p_video_timing_info;
         panelstruct->panelresetseq
                      = &ili9881c_720p_video_reset_seq;
-        panelstruct->backlightinfo = &ili9881c_720p_video_backlight;
+        //panelstruct->backlightinfo = &ili9881c_720p_video_backlight;
         pinfo->mipi.panel_cmds
                     = ili9881c_720p_video_on_command;
         pinfo->mipi.num_of_panel_cmds
