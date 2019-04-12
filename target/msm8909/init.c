@@ -234,8 +234,8 @@ int target_volume_up()
 /* Return 1 if vol_down pressed */
 uint32_t target_volume_down()
 {
-	if ((board_hardware_id() == HW_PLATFORM_QRD) &&
-			(board_hardware_subtype() == SUB_TYPE_SKUT)) {
+	if (((board_hardware_id() == HW_PLATFORM_QRD) &&
+            (board_hardware_subtype() == SUB_TYPE_SKUT))||((board_hardware_id() == HW_PLATFORM_MTP))){
 		uint32_t status = 0;
 
 		gpio_tlmm_config(TLMM_VOL_DOWN_BTN_GPIO, 0, GPIO_INPUT, GPIO_PULL_UP, GPIO_2MA, GPIO_ENABLE);
