@@ -361,13 +361,16 @@ int target_panel_reset(uint8_t enable, struct panel_reset_sequence *resetseq,
 	return ret;
 }
 
-int target_ldo_ctrl(uint8_t enable)
-{
-	if (enable)
-		regulator_enable();     /* L2, L6, and L17 */
+#if SMD_SUPPORT
+	int target_ldo_ctrl(uint8_t enable)
+	{
+		if (enable)
+			regulator_enable();     /* L2, L6, and L17 */
 
-	return NO_ERROR;
-}
+		return NO_ERROR;
+	}
+#endif
+
 
 bool target_display_panel_node(char *panel_name, char *pbuf, uint16_t buf_size)
 {
